@@ -71,26 +71,22 @@ if(require.main == module) {
          var file;
          var checkJson;  
         if (program.url != undefined) {
-	rest.get(program.url).on('complete', function(result, response) {
-	      
+	rest.get(program.url).on('complete', function(result, response) {    
 	    $ = cheerio.load(result);
- var checks = loadChecks(program.checks).sort();
-    var out = {};
-    for(var ii in checks) {
-        var present = $(checks[ii]).length > 0;
-        out[checks[ii]] = present;
-        
-    }
-
-checkJson = out; 
-var outJson = JSON.stringify(checkJson, null, 4);
-    console.log(outJson);});
-}else {
-     checkJson = checkHtmlFile(program.file, program.checks);
-
-    var outJson = JSON.stringify(checkJson, null, 4);
-    console.log(outJson);
-}
+	    var checks = loadChecks(program.checks).sort();
+	    var out = {};
+	    for(var ii in checks) {
+		var present = $(checks[ii]).length > 0;
+		out[checks[ii]] = present;
+	    }
+	    checkJson = out; 
+	    var outJson = JSON.stringify(checkJson, null, 4);
+	    console.log(outJson);});
+	}else {
+	    checkJson = checkHtmlFile(program.file, program.checks);
+	    var outJson = JSON.stringify(checkJson, null, 4);
+	    console.log(outJson);
+	}
 } else {
     exports.checkHtmlFile = checkHtmlFile;
 }
