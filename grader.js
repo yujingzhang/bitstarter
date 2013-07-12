@@ -79,13 +79,18 @@ if(require.main == module) {
     for(var ii in checks) {
         var present = $(checks[ii]).length > 0;
         out[checks[ii]] = present;
+        
     }
 
-checkJson = out;}); }else {
+checkJson = out; 
+var outJson = JSON.stringify(checkJson, null, 4);
+    console.log(outJson);});
+}else {
      checkJson = checkHtmlFile(program.file, program.checks);
-}
+
     var outJson = JSON.stringify(checkJson, null, 4);
     console.log(outJson);
+}
 } else {
     exports.checkHtmlFile = checkHtmlFile;
 }
